@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'shared/app_widget.dart';
+import 'app_widget.dart';
 
 void main() {
   runApp(AppFirebase());

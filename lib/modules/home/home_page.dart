@@ -69,7 +69,8 @@ class _HomePageState extends State<HomePage> {
             )),
             GestureDetector(
               onTap: (){
-                print("Fui clicado");
+                // Navigator.pushNamed(context, "/barcode_scanner");
+                // print("Fui clicado");
               },
               child: Container(
                 width: 56,
@@ -80,7 +81,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 child:  IconButton(
                   onPressed: (){
-                    
+                    Navigator.pushNamed(context, "/barcode_scanner");
+                    print("Fui clicado");
                   }, 
                   icon: Icon(
                     Icons.add_box_outlined,
