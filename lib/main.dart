@@ -7,39 +7,36 @@ void main() {
 }
 
 class AppFirebase extends StatefulWidget {
-  const AppFirebase({Key? key}) : super(key: key);
-
   @override
-  State<AppFirebase> createState() => _AppFirebaseState();
+  _AppFirebaseState createState() => _AppFirebaseState();
 }
 
 class _AppFirebaseState extends State<AppFirebase> {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
-  
-@override
+
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      // Initialize FlutterFire:
-      future: _initialization,
-      builder: (context, snapshot) {
-        // Check for errors
-        if (snapshot.hasError) {
-          return Material(
-            child: Center(
-              child: Text(
-                "Não foi possível inicializar o FireBase", 
-                textDirection: TextDirection.ltr,
+        future: _initialization,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Material(
+              child: Center(
+                child: Text(
+                  "Não foi possível inicializar o Firebase",
+                  textDirection: TextDirection.ltr,
                 ),
-                ),
-          );
-        } else if(snapshot.connectionState == ConnectionState.done){
-          return AppWidget();
-        } else{
-          return Material(
-            child: Center(child: CircularProgressIndicator()
-            ),
+              ),
             );
-        }
-  });
-} 
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            return AppWidget();
+          } else {
+            return Material(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+        });
+  }
 }

@@ -7,7 +7,7 @@ import 'package:payflow/shared/widgets/bottom_sheet/bottom_sheet_widget.dart';
 import 'package:payflow/shared/widgets/set_label_buttons/set_label_buttons.dart';
 
 class BarcodeScannerPage extends StatefulWidget {
-  const BarcodeScannerPage({ Key? key }) : super(key: key);
+  BarcodeScannerPage({Key? key}) : super(key: key);
 
   @override
   _BarcodeScannerPageState createState() => _BarcodeScannerPageState();
@@ -16,7 +16,7 @@ class BarcodeScannerPage extends StatefulWidget {
 class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
   final controller = BarcodeScannerController();
 
-@override
+  @override
   void initState() {
     controller.getAvailableCameras();
     controller.statusNotifier.addListener(() {
@@ -40,12 +40,12 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
     return SafeArea(
       top: true,
       bottom: true,
-      right: true,
       left: true,
+      right: true,
       child: Stack(
         children: [
           ValueListenableBuilder<BarcodeScannerStatus>(
-           valueListenable: controller.statusNotifier,
+              valueListenable: controller.statusNotifier,
               builder: (_, status, __) {
                 if (status.showCamera) {
                   return Container(
@@ -59,35 +59,39 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
           RotatedBox(
             quarterTurns: 1,
             child: Scaffold(
-              backgroundColor: Colors.transparent,
-              appBar: AppBar(
-                backgroundColor: Colors.black,
-                title:Text(
-                  "Escaneie o código de barras do boleto",
-                   style: TextStyles.buttonBackground,
+                backgroundColor: Colors.transparent,
+                appBar: AppBar(
+                  backgroundColor: Colors.black,
+                  centerTitle: true,
+                  title: Text(
+                    "Escaneie o código de barras do boleto",
+                    style: TextStyles.buttonBackground,
+                  ),
+                  leading: BackButton(
+                    color: AppColors.background,
+                  ),
                 ),
-                centerTitle: true,
-                leading: BackButton(
-                  color: AppColors.background,  
+                body: Column(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        color: Colors.black,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        color: Colors.black,
+                      ),
+                    )
+                  ],
                 ),
-              ),
-              body: Column(
-                children: [
-                Expanded(
-                  child: Container(
-                  color:Colors.black.withOpacity(0.6),
-                  )),
-                  Expanded(
-                    flex:2,
-                  child: Container(
-                  color:Colors.transparent,
-                  )),
-                  Expanded(
-                  child: Container(
-                  color:Colors.black.withOpacity(0.6),
-                  )),
-              ],),
-              bottomNavigationBar: SetLabelButtons(
+                bottomNavigationBar: SetLabelButtons(
                   labelPrimary: "Inserir código do boleto",
                   onTapPrimary: () {
                     controller.status = BarcodeScannerStatus.error("Error");
@@ -96,7 +100,7 @@ class _BarcodeScannerPageState extends State<BarcodeScannerPage> {
                   onTapSecondary: controller.scanWithImagePicker,
                 )),
           ),
-             ValueListenableBuilder<BarcodeScannerStatus>(
+          ValueListenableBuilder<BarcodeScannerStatus>(
               valueListenable: controller.statusNotifier,
               builder: (_, status, __) {
                 if (status.hasError) {

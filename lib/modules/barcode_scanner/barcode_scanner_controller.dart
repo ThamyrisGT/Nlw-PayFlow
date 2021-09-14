@@ -41,7 +41,6 @@ final statusNotifier =
 
       if (barcode != null && status.barcode.isEmpty) {
         status = BarcodeScannerStatus.barcode(barcode);
-        // if(cameraController!=null)
         cameraController!.dispose();
         await barcodeScanner.close();
       }
@@ -66,7 +65,6 @@ final statusNotifier =
   }
 
   void listenCamera() {
-    // if(cameraController !=null)
     if (cameraController!.value.isStreamingImages == false)
       cameraController!.startImageStream((cameraImage) async {
         if (status.stopScanner == false) {
